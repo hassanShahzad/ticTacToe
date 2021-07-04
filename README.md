@@ -12,6 +12,8 @@ $ git clone https://github.com/hassanShahzad/ticTacToe.git
 
 For environment setup please see: https://reactnative.dev/docs/environment-setup
 
+Use cmd in Windows or Terminal in MacOS to go to the project folder and then:
+
 Install dependencies
 
 ```
