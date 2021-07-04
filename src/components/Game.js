@@ -1,26 +1,26 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Grid from './Grid';
 import {View} from 'react-native';
+import {useSelector} from 'react-redux';
 import styled from 'styled-components/native';
-import {
-  AVAILABLE,
-  DRAW,
-  GAMEOVER,
-  ROBOT_TURN,
-  USER_TURN,
-  WINNING_COMBINATIONS,
-} from '../shared/constants';
-
+import {AVAILABLE, GAMEOVER, ROBOT_TURN, USER_TURN} from '../shared/constants';
+import {evaluateWinner} from '../actions/gameActions';
 import {onRobotTurn} from '../actions/robotActions';
 
 const Game = props => {
-  const [grid, setGrid] = useState(new Array(9).fill(AVAILABLE));
+  const gridData = useSelector(state => state);
+  const numberOfRows = gridData.game.numberOfRows;
+  const gridSize = numberOfRows * numberOfRows;
+  const winningPositions = gridData.game.winningCombinations;
+  const [grid, setGrid] = useState(new Array(gridSize).fill(AVAILABLE));
   const [entiyTurn, setEntiyTurn] = useState(USER_TURN);
   const isRenderingAllow = useRef(true);
+
   useEffect(() => {
-    const result = evaluateWinner();
+    const result = evaluateWinner(grid, winningPositions);
     if (result !== null) {
       props.onFinish(result);
+      setEntiyTurn(GAMEOVER);
     } else if (!isRenderingAllow.current) {
       isRenderingAllow.current = true;
       setTimeout(() => {
@@ -42,30 +42,6 @@ const Game = props => {
       isRenderingAllow.current = false;
     }
     onFinish();
-  };
-
-  const evaluateWinner = () => {
-    let winner = null;
-
-    if (!grid.some(place => place === AVAILABLE)) {
-      setEntiyTurn(GAMEOVER);
-      winner = DRAW;
-    }
-
-    for (let i = 0; i < WINNING_COMBINATIONS.length; ++i) {
-      const entity = grid[WINNING_COMBINATIONS[i][0]];
-
-      if (WINNING_COMBINATIONS[i].every(cell => checkCell(cell, entity))) {
-        winner = entity;
-        break;
-      }
-    }
-
-    return winner;
-  };
-
-  const checkCell = (cell, entity) => {
-    return grid[cell] === entity && grid[cell] !== AVAILABLE;
   };
 
   const handlePress = index => {

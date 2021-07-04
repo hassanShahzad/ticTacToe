@@ -1,9 +1,14 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
+import {useDispatch} from 'react-redux';
 import styled from 'styled-components/native';
+import {setGrid} from '../actions/gameActions';
 
 function HomeScreen({navigation}) {
+  const dispatch = useDispatch();
+  const gameReducer = () => dispatch(setGrid());
   playGame = () => {
+    gameReducer();
     navigation.navigate('GameScreen');
   };
 

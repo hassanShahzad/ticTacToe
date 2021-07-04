@@ -1,9 +1,11 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import styled from 'styled-components/native';
 import Cell from './Cell';
 
 const Grid = props => {
-  const numberOfRows = 3;
+  const gridData = useSelector(state => state);
+  const numberOfRows = gridData.game.numberOfRows;
   const renderRows = () => {
     const rows = [];
 
