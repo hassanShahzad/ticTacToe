@@ -32,19 +32,25 @@ Run the app for android:
 
 Run the app for ios:
 
-Install cocoa pod
-
+Go to ios folder
 ```
 cd ios
 ```
+
+Install cocoa pod
+
 
 ```
 pod install
 ```
 
+Go to back to project folder
+
 ```
 cd ..
 ```
+
+Run for ios
 
 ```
  npx react-native run-ios
