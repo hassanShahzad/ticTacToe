@@ -21,33 +21,33 @@ const Result = props => {
   return (
     <View>
       <ResultText>{getResultMessage()}</ResultText>
-      <TouchableOpacity onPress={onRestartGameBtnClick}>
+      <ResetButton onPress={onRestartGameBtnClick}>
         <ResetText>Reset</ResetText>
-      </TouchableOpacity>
+      </ResetButton>
     </View>
   );
 };
 
 export const ResultText = styled.Text`
   color: red;
-  font-family: Poppins;
   font-size: 24px;
   margin: 18px;
   text-align: center;
 `;
-export const ResetText = styled.Text`
+export const ResetButton = styled.TouchableOpacity`
   background-color: red;
-  border-width: 3px;
-  border-radius: 25px;
   border-color: red;
-  font-family: Poppins;
+  border-radius: 25px;
+  border-width: 3px;
+  margin-bottom: 30px;
+`;
+export const ResetText = styled.Text`
   font-size: 20px;
   line-height: 40px;
   text-align: center;
   color: white;
   width: 250px;
   height: 50px;
-  margin-bottom: 30px;
   padding: 5px;
 `;
 export default Result;
