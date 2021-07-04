@@ -11,6 +11,8 @@ import {
   WINNING_COMBINATIONS,
 } from '../shared/constants';
 
+import {onRobotTurn} from '../actions/robotActions';
+
 const Game = props => {
   const [grid, setGrid] = useState(new Array(9).fill(AVAILABLE));
   const [entiyTurn, setEntiyTurn] = useState(USER_TURN);
@@ -19,6 +21,13 @@ const Game = props => {
     const result = evaluateWinner();
     if (result !== null) {
       props.onFinish(result);
+    } else if (!isRenderingAllow.current) {
+      isRenderingAllow.current = true;
+      setTimeout(() => {
+        const robotChoice = onRobotTurn(grid);
+        fillCell(robotChoice, ROBOT_TURN);
+        setEntiyTurn(USER_TURN);
+      }, 1000);
     }
   }, [grid]);
 
