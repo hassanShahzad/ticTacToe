@@ -1,5 +1,10 @@
 import {AVAILABLE, DRAW} from '../shared/constants';
-export const setGrid = () => {
+export const setGrid = gridSize => {
+  if (gridSize === 16) {
+    return {
+      type: 'SET_GRID_OF_SIXTEEN_ELEMENTS',
+    };
+  }
   return {
     type: 'SET_GRID_OF_NINE_ELEMENTS',
   };
@@ -9,7 +14,6 @@ export const evaluateWinner = (board, winningCombinations) => {
   let winner = null;
   if (!board.some(place => place === AVAILABLE)) {
     winner = DRAW;
-    return winner;
   }
 
   for (let i = 0; i < winningCombinations.length; ++i) {

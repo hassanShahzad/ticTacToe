@@ -12,7 +12,6 @@ const Grid = props => {
     for (let i = 0; i < numberOfRows; ++i) {
       rows.push(<Row key={i}>{renderRow(i)}</Row>);
     }
-
     return rows;
   };
 
@@ -22,12 +21,10 @@ const Grid = props => {
 
     for (let i = 0; i < numberOfRows; ++i) {
       const index = number * numberOfRows + i;
-
       cells.push(
         <Cell key={i} value={grid[index]} index={index} onPress={onPress} />,
       );
     }
-
     return cells;
   };
 

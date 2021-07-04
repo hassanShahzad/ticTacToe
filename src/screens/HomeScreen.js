@@ -6,18 +6,26 @@ import {setGrid} from '../actions/gameActions';
 
 function HomeScreen({navigation}) {
   const dispatch = useDispatch();
-  const gameReducer = () => dispatch(setGrid());
-  playGame = () => {
-    gameReducer();
+  const smallGameReducer = () => dispatch(setGrid(9));
+  const mediumGameReducer = () => dispatch(setGrid(16));
+
+  playSmallGame = () => {
+    smallGameReducer();
     navigation.navigate('GameScreen');
   };
-
+  playMediumGame = () => {
+    mediumGameReducer();
+    navigation.navigate('GameScreen');
+  };
   return (
     <Container>
       <BrandNameText>ON AIR</BrandNameText>
       <BrandMessageText>all things live</BrandMessageText>
-      <TouchableOpacity onPress={playGame}>
-        <StartGameText>Play Game</StartGameText>
+      <TouchableOpacity onPress={playSmallGame}>
+        <StartGameText>Play 3x3 Game</StartGameText>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={playMediumGame}>
+        <StartGameText>Play 4x4 Game</StartGameText>
       </TouchableOpacity>
     </Container>
   );
